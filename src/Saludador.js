@@ -1,6 +1,8 @@
 
 const GreetsOnEnglish=["Hello ","Good Morning ","Good Afternoon ","Good Night "]
 const GreetsOnSpanish=["Hola ","Buenos dias ","Buenas tardes ","Buenas Noches "]
+
+  
 function getGreetPreambleWithHour(selectedLanguageGreets) {
   let ans=""
   let today = new Date();   
@@ -21,6 +23,7 @@ function getGreetPreambleWithHour(selectedLanguageGreets) {
 
 }
   
+
 function Saludar(Name="", GreetByHour=false,Language="es") {
   let Greet=""
   let selectedLanguageGreets

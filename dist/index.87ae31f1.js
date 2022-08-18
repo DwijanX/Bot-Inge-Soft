@@ -543,6 +543,12 @@ var Name = document.querySelector("#Name");
 var form = document.querySelector("#Saludar-Form");
 var div = document.getElementById("resultado-div");
 var ComboBox = document.getElementById("LangCombo");
+var NameLabel = document.getElementById("NameLabel");
+ComboBox.addEventListener("change", function() {
+    var selectedLanguage = ComboBox.options[ComboBox.selectedIndex].text;
+    if (selectedLanguage == "es") NameLabel.innerHTML = "Tu Nombre: ";
+    else NameLabel.innerHTML = "Your Name: ";
+});
 form.addEventListener("submit", function(event) {
     event.preventDefault();
     var selectedLanguage = ComboBox.options[ComboBox.selectedIndex].text;
