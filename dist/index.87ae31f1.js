@@ -533,16 +533,20 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"jZ78i":[function(require,module,exports) {
 "use strict";
-var _Saludador = require("./Saludador");
+var _Saludador = _interopRequireDefault(require("./Saludador"));
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        "default": obj
+    };
+}
 var Name = document.querySelector("#Name");
 var form = document.querySelector("#Saludar-Form");
 var div = document.getElementById("resultado-div");
+var ComboBox = document.getElementById("LangCombo");
 form.addEventListener("submit", function(event) {
     event.preventDefault();
-    var today = new Date();
-    var hour = today.getHours();
-    console.log(hour.value);
-    div.innerHTML = "<p>" + (0, _Saludador.SaludarByHour)(Name.value, hour) + "</p>";
+    var selectedLanguage = ComboBox.options[ComboBox.selectedIndex].text;
+    div.innerHTML = "<p>" + (0, _Saludador["default"])(Name.value, true, selectedLanguage) + "</p>";
 });
 
 },{"./Saludador":"fSG0z"}],"fSG0z":[function(require,module,exports) {
@@ -550,18 +554,42 @@ form.addEventListener("submit", function(event) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Saludar = Saludar;
-exports.SaludarByHour = SaludarByHour;
-function Saludar(Name) {
-    return "Hola " + Name;
-}
-function SaludarByHour(Name, hour) {
+exports["default"] = void 0;
+var GreetsOnEnglish = [
+    "Hello ",
+    "Good Morning ",
+    "Good Afternoon ",
+    "Good Night "
+];
+var GreetsOnSpanish = [
+    "Hola ",
+    "Buenos dias ",
+    "Buenas tardes ",
+    "Buenas Noches "
+];
+function getGreetPreambleWithHour(selectedLanguageGreets) {
     var ans = "";
-    if (hour > 0 && hour < 12) ans += "Buenos dias ";
-    else if (hour >= 12 && hour <= 18) ans += "Buenas tardes ";
-    else ans += "Buenas Noches ";
-    return ans + Name;
+    var today = new Date();
+    var hour = today.getHours();
+    if (hour > 0 && hour < 12) ans += selectedLanguageGreets[1];
+    else if (hour >= 12 && hour <= 18) ans += selectedLanguageGreets[2];
+    else ans += selectedLanguageGreets[3];
+    return ans;
 }
+function Saludar() {
+    var Name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+    var GreetByHour = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var Language = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "es";
+    var Greet = "";
+    var selectedLanguageGreets;
+    if (Language == "es") selectedLanguageGreets = GreetsOnSpanish;
+    else if (Language == "en") selectedLanguageGreets = GreetsOnEnglish;
+    if (GreetByHour) Greet += getGreetPreambleWithHour(selectedLanguageGreets);
+    else Greet += selectedLanguageGreets[0];
+    return Greet + Name;
+}
+var _default = Saludar;
+exports["default"] = _default;
 
 },{}]},["gkoGO","jZ78i"], "jZ78i", "parcelRequirec771")
 
